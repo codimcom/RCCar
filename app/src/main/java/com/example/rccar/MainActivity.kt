@@ -17,10 +17,8 @@ class MainActivity : AppCompatActivity(){//},OnSeekBarChangeListener {
 
     private var speedView: TextView? = null
     private var turnView: TextView? = null
-    //private var seekbar: SeekBar? = null
-    //private var seekbar
     private var btAdapter: BluetoothAdapter? = null
-    lateinit var btConnection: BtConnection
+    private lateinit var btConnection: BtConnection
     private var mac: String = "None"
 
 
@@ -30,14 +28,12 @@ class MainActivity : AppCompatActivity(){//},OnSeekBarChangeListener {
 
         val buttonConnect: Button = findViewById(R.id.buttonConnect)
         val send512: Button = findViewById(R.id.send512)
-        //val bSendA: Button = findViewById(R.id.bSendA)
         val turnBar: SeekBar = findViewById(R.id.seekbar)
         val speedBar: SeekBar = findViewById(R.id.seekBar2)
         var turn = 0
         var oldTurn = 0
         var speed = 0
         var oldSpeed = 0
-        //var message = 0
 
         speedView = findViewById(R.id.speedView)
         turnView = findViewById(R.id.TurnView)
@@ -56,10 +52,7 @@ class MainActivity : AppCompatActivity(){//},OnSeekBarChangeListener {
         turnBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 turnView!!.text = ((progress - 50)/10).toString()
-                //seekbarStatusView!!.text = "Tracking Touch"
-                //btConnection.sendMessage(progress)
                 turn = (progress - 50)/10
-                //if(abs(turn) == 1){turn = 0}
                 if (turn != oldTurn){ sendMessage(turn, speed) }
                 oldTurn = turn
             }
@@ -69,7 +62,6 @@ class MainActivity : AppCompatActivity(){//},OnSeekBarChangeListener {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                //seekbarStatusView!!.text = "Stopped Tracking Touch"
                 seekBar!!.setProgress(50, true)
             }
 
@@ -78,7 +70,6 @@ class MainActivity : AppCompatActivity(){//},OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 speedView!!.text = ((progress - 50)/10).toString()
                 speed = (progress - 50)/10
-                //if(abs(speed) == 1){speed = 0}
                 if (speed != oldSpeed){ sendMessage(turn, speed) }
                 oldSpeed = speed
             }
@@ -118,7 +109,6 @@ class MainActivity : AppCompatActivity(){//},OnSeekBarChangeListener {
     }
 
     private fun getPairedDevices(){
-        //Log.d("MyLog", "In fun getPairedDevices")
         try {
             val pairedDevices: Set<BluetoothDevice>? = btAdapter?.bondedDevices
             pairedDevices?.forEach {
