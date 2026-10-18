@@ -23,16 +23,16 @@ class ConnectThread(private val device: BluetoothDevice) : Thread() {
     }
 
     override fun run() {
-        val cntxt = MainActivity()
+        //val cntxt = MainActivity()
         try {
             Log.d("MyLog", "connecting...")
             mSocket?.connect()
             Log.d("MyLog", "connected")
             rThread = ReceiveThread(mSocket!!)
             rThread.start()
-            Toast.makeText(cntxt, "connected to HC-06", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(cntxt, "connected to HC-06", Toast.LENGTH_SHORT).show()
         } catch (e: SecurityException) {
-            Toast.makeText(cntxt, e.toString(), Toast.LENGTH_LONG).show()
+            //Toast.makeText(cntxt, e.toString(), Toast.LENGTH_LONG).show()
             Log.d("MyLog", e.toString())
         } catch(e2: IOException){
             Log.d("MyLog", e2.toString())
