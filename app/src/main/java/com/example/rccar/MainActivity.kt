@@ -89,14 +89,19 @@ class MainActivity : AppCompatActivity(){//},OnSeekBarChangeListener {
     private fun sendMessage(turn: Int, speed: Int){
         var message = 0
         Log.d("MyLog", "${turn}, ${speed}")
-        if (turn >= 0 && speed >= 0){ message = turn*10 + speed } // 3 2 => 32
-        else if (turn <= 0 && speed <= 0){ message = 100 - (turn*10 + speed) } // -3 -2 => 132
+        /*if (turn >= 0 && speed >= 0){ message = turn*10 + speed } // 3 2 => 32
+        else if (turn <= 0 && speed <= 0){ message = 100 + (turn*10 + speed)*(-1) } // -3 -2 => 132
         else if (turn >= 0 && speed <= 0){ message = 200 + turn*10 - speed } // 3 -2 => 232
         else if (turn <= 0 && speed >= 0){
             var tem = -turn*10 + speed
-            if (tem < 44){ message = 55 + tem} // -3 2 => 87
+            if (tem <= 44){ message = 55 + tem} // -3 2 => 87
             else {message = 155 + tem-44} // -5 2 => 161
-        } // -3 2 => cringe
+        } // -3 2 => cringe*/
+        var turn1 = turn + 5
+        var sp1 = speed + 5
+
+        message = turn1*11 + sp1
+        Log.d("MyLog", message.toString())
         btConnection.sendMessage(message)
     }
 
